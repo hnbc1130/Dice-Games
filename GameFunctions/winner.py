@@ -1,12 +1,9 @@
 def winner(self):
         
         try:
-            #make an empty dict then loop through to the length of diceroller with each face being a key.
-            #loop through each players rolls and add 1 to the coresponding key for each face. 
-            #check the player bid, use first digit as key, then if bid is <= to the dict value, winner, else player_roll for that player - 1 (is that a set var that can be changed and saved as a state?)
             total = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
-            for player in self.players.values():
-                for roll in player:
+            for player in self.player:
+                for roll in player.dice_rolls:
                     if roll == 1:
                         total[roll] += 1
                     elif roll == 2:
@@ -22,16 +19,18 @@ def winner(self):
                     else:
                         return total
       
-            for key, Value in self.bids.items():
-                if Value == (0, 0): 
-                        print(f"{key} skipped")                            
-                    #print(f"{user.values()} skipped")
+            for player in self.player:                   
+                if player.bids == (0, 0): 
+                        print(f"{player.player_name} skipped")                            
                 else:   
-                    face = int(Value[1])
-                    how_many = int(Value[0])
+                    face = player.bids[1]
+                    how_many = player.bids[0]
                     if how_many <= total[face]:
-                        print(f"{key} you win")
+                        player.wins += 1 
+                        print(f"{player.player_name} you win")
                     else:
-                        print(f"{key} you lose")
+                        player.dice -= 1
+                        print(f"{player.player_name} you lose")
+
         except:
             return

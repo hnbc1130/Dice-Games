@@ -1,16 +1,16 @@
-import GameFunctions.diceroller as diceroller
+import GameFunctions.dice_set as dice_set
 
-def make_players(self):
-    while len(self.players) < self.player_num:
-        player_name = input("Player unique Name: ")
-        player_roll = [0, 0, 0, 0]
-        for roll in range(len(player_roll)):
-            player_roll[roll] = diceroller.diceroller(6).roll()
-        self.players[f"{player_name}"] = player_roll 
-    self.bids = self.players.copy()
-    self.can_guess = self.players.copy()  
-    for player in self.can_guess:
-        self.can_guess[f"{player}"] = "y"  
-    for player in self.bids:
-        self.bids[f"{player}"] = (0, 0)
-
+class players():
+    try:
+        def __init__(self):
+            self.player_name = input("Player Name\n")
+            self.dice = 4 
+            self.dice_rolls = dice_set.dice_set(self.dice) #returns a lists in a list, removed []
+            self.can_guess = True
+            self.bids = (0, 0)
+            self.wins = 0
+            #add computer players
+    
+    except:
+        TimeoutError
+        
